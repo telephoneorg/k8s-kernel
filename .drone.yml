@@ -1,0 +1,24 @@
+pipeline:
+  build:
+    image: debian
+    environment:
+    - KERNEL_VERSION=$KERNEL_VERSION
+    commands:
+      - make kernel
+      - make test
+  when:
+    event: tag
+
+  publish:
+    github_release:
+    image: plugins/github-release
+    secrets: [ github_token ]
+    files: dist/$KERNEL_VERSION/*
+    file_exists: overwrite
+    checksum: sha256
+    when:
+      event: tag
+
+matrix:
+  KERNEL_VERSION:
+  - 4.4.78

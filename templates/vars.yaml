@@ -1,0 +1,11 @@
+name: k8s-kernel
+heading: Kubernetes Optimized Kernel
+description: |-
+  A 4.4.x kernel built for running Kubernetes.
+github:
+  user: joeblackwaslike
+  org: joeblackwaslike
+  repo: k8s-kernel
+docker:
+  user: joeblackwaslike
+  org: joeblackwaslike

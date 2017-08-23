@@ -1,5 +1,6 @@
 #!/bin/bash
 
+BASE=$(dirname $0)
 VERSION=$1
 
 if [[ -z "${VERSION}" ]]; then
@@ -12,7 +13,6 @@ set -ex
 
 mkdir -p dist/${VERSION}
 
-docker build -f src/images/builder/Dockerfile -t kernelbuilder src
+docker build -f $BASE/src/images/builder/Dockerfile -t kernelbuilder $BASE/src
 
-docker run --rm -v `pwd`/dist/${VERSION}:/dist kernelbuilder /src/build-in-docker.sh ${VERSION}
-
+docker run --rm -v $(realpath $BASE/..)/dist/${VERSION}:/dist kernelbuilder /src/build-in-docker.sh ${VERSION}

@@ -7,9 +7,6 @@ pipeline:
     - /var/run/docker.sock:/var/run/docker.sock
     commands:
     - make kernel
-    # - make test
-  # when:
-  #   event: tag
 
   publish:
     github_release:
@@ -18,8 +15,8 @@ pipeline:
     files: dist/$KERNEL_VERSION/*
     file_exists: overwrite
     checksum: sha256
-    # when:
-    #   event: tag
+    when:
+      event: tag
 
 matrix:
   KERNEL_VERSION:

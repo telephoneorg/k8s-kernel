@@ -1,7 +1,7 @@
 VERSION ?= 4.4.78
 CODENAME ?= stretch
 
-.PHONY: kernel clean test
+.PHONY: kernel clean templates test
 
 kernel:
 	scripts/enable-extras.sh $(VERSION)
@@ -15,3 +15,6 @@ test:
 	for pkg in firmware-image headers image libc-dev; do \
 		test -f /dist/$(VERSION)/linux-$${pkg}*; \
 	done
+
+templates:
+	tmpld --strict --data templates/vars.yaml templates/*.j2

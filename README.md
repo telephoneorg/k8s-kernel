@@ -1,5 +1,12 @@
 # k8s Kernel
+[![Build Status](https://drone.valuphone.com/api/badges/joeblackwaslike/k8s-kernel/status.svg)](https://drone.valuphone.com/joeblackwaslike/k8s-kernel) [![Docker Pulls](https://img.shields.io/docker/pulls/joeblackwaslike/.svg)](https://hub.docker.com/r/joeblackwaslike//) [![Github Repo](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/joeblackwaslike/k8s-kernel)
 
+
+## Maintainer
+Joe Black | <me@joeblack.nyc> | [github](https://github.com/joeblackwaslike)
+
+
+## Introduction
 This is a 4.4 kernel built for running Kubernetes.
 
 This is a fork from the original repo and has the following changes:
@@ -17,7 +24,7 @@ It has the following changes:
 
 
 ## Building
-Check out the code into ~: `cd ~; git clone https://github.com/{{ github_user }}/{{ github_repo }}.git`
+Check out the code into ~: `cd ~; git clone https://github.com/joeblackwaslike/k8s-kernel.git`
 
 Note: if docker is not using overlay, it will likely fail during the kernel build.
 

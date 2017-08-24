@@ -13,5 +13,5 @@ clean:
 
 test:
 	for pkg in firmware-image headers image libc-dev; do \
-		test -f "dist/$(VERSION)/linux-$${pkg}*"; \
+		test -f "/dist/$(VERSION)/linux-$${pkg}*"; \
 	done

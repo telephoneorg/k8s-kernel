@@ -11,7 +11,7 @@ clean:
 	rm -rf buildkernel/dist/* buildkernel/dist/.*
 	rm -rf dist/*
 
-# test:
-# 	for pkg in firmware-image headers image libc-dev; do \
-# 		test -f /dist/$(VERSION)/linux-$${pkg}*; \
-# 	done
+test:
+	for pkg in firmware-image headers image libc-dev; do \
+		test -f /dist/$(VERSION)/linux-$${pkg}*; \
+	done

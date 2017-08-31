@@ -1,4 +1,4 @@
-VERSION ?= 4.4.78
+VERSION ?= 4.9.46
 CODENAME ?= stretch
 
 .PHONY: kernel clean templates test

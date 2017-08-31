@@ -10,14 +10,14 @@ pipeline:
 
   publish:
     github_release:
-    image: plugins/github-release
-    secrets: [ api_key ]
-    files: dist/$KERNEL_VERSION/*
-    file_exists: overwrite
-    checksum: sha256
-    when:
-      event: tag
+      image: plugins/github-release
+      # secrets: [ api_key ]
+      files: dist/$KERNEL_VERSION/*
+      file_exists: overwrite
+      checksum: sha256
+      when:
+        event: tag
 
 matrix:
   KERNEL_VERSION:
-  - 4.4.78
+  - 4.9.46

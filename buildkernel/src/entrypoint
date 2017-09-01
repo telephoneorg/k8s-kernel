@@ -4,7 +4,7 @@ VERSION=$1
 
 if [[ -z "${VERSION}" ]]; then
     echo "Syntax: $0 <version>"
-    echo "  where version is an official kernel version, e.g. 4.4.39"
+    echo "  where version is an official kernel version, e.g. 4.9.46"
     exit 1
 fi
 
@@ -12,7 +12,6 @@ set -ex
 
 REVISION=k8s
 KDEB_PKGVERSION=${VERSION}
-CODENAME=$(cat /etc/apt/sources.list  | head -1 | awk '{print $3}')
 
 gpg2 --import /src/38DBBDC86092693E.asc
 
@@ -26,10 +25,10 @@ pushd /build
 
     rm -rf linux-${VERSION} || true
     tar xf linux-${VERSION}.tar.xz
-    cp /src/config-${VERSION} linux-${VERSION}/.config
+    cp -L /src/configs/config-${VERSION} linux-${VERSION}/.config
     pushd linux-${VERSION}
         make clean
-        make -j $(nproc) deb-pkg LOCALVERSION=-k8s KDEB_PKGVERSION=${KDEB_PKGVERSION}
+        make -j $(nproc) deb-pkg LOCALVERSION=-${REVISION} KDEB_PKGVERSION=${KDEB_PKGVERSION}
         popd
     popd
 

@@ -15,6 +15,8 @@ This is a fork from the original repo and has the following changes:
     * `CONFIG_MEMCG_KMEM`=y
     * `CONFIG_CGROUP_HUGETLB`=y
     * `CONFIG_DEBUG_INFO`=n
+    * Numerous exclusions for unnecessary modulse and drivers
+    * Numerous additions for 4.9.x compatibility
 
 Currently it only builds a Debian kernel.
 

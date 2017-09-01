@@ -4,13 +4,13 @@ VERSION=$1
 
 if [[ -z "${VERSION}" ]]; then
 	echo "Syntax: $0 <version>"
-	echo "  where version is an official kernel version, e.g. 4.4.39"
+	echo "  where version is an official kernel version, e.g. 4.9.46"
   exit 1
 fi
 
 set -ex
 
-CONFIG_PATH="buildkernel/src/config-${VERSION}"
+CONFIG_PATH="buildkernel/src/configs/config-${VERSION}"
 
 sed -i '/CONFIG_DEBUG_INFO/s/y/n/' "$CONFIG_PATH"
 sed -i 's/# \(CONFIG_MEMCG_SWAP_ENABLED\) is not set/\1=y/' "$CONFIG_PATH"

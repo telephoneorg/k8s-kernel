@@ -15,4 +15,6 @@ mkdir -p dist/${VERSION}
 
 docker build -f $BASE/src/images/builder/Dockerfile -t kernelbuilder $BASE/src
 
-docker run --rm -v $(realpath $BASE/..)/dist/${VERSION}:/dist kernelbuilder /src/build-in-docker.sh ${VERSION}
+docker run --rm \
+	-v $(realpath $BASE/..)/dist/${VERSION}:/dist \
+	kernelbuilder ${VERSION}

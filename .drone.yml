@@ -2,7 +2,7 @@ pipeline:
   build:
     image: joeblackwaslike/docker-builder
     environment:
-    - KERNEL_VERSION=$KERNEL_VERSION
+    - KERNEL_VERSION=${KERNEL_VERSION}
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     commands:
@@ -13,7 +13,7 @@ pipeline:
   github_release:
     image: plugins/github-release
     secrets: [ github_token ]
-    files: dist/$KERNEL_VERSION/*
+    files: dist/${KERNEL_VERSION}/*
     file_exists: overwrite
     checksum: sha256
     when:

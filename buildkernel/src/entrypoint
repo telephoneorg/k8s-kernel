@@ -23,7 +23,7 @@ pushd /build
     # Check signature
     xz -cd linux-${VERSION}.tar.xz | gpg2 --verify linux-${VERSION}.tar.sign -
 
-    rm -rf linux-${VERSION} || true
+    # rm -rf linux-${VERSION} || true
     tar xf linux-${VERSION}.tar.xz
     cp -L /src/configs/config-${VERSION} linux-${VERSION}/.config
     pushd linux-${VERSION}

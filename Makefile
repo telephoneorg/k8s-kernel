@@ -1,15 +1,33 @@
 VERSION ?= 4.9.46
 CODENAME ?= stretch
 
-.PHONY: kernel clean templates test
+BASE := $(realpath $(dir $(MAKEFILE_LIST)))
+CONFIG_PATH := $(BASE)/kernel-builder/src/configs/config-$(VERSION)
 
-kernel:
-	scripts/enable-extras.sh $(VERSION)
-	cd buildkernel && ./build.sh $(VERSION)
+.PHONY: build build-builder build-kernel clean templates test pre-build
+
+build: pre-build build-builder build-kernel
+
+pre-build:
+	sed -i '/CONFIG_DEBUG_INFO/s/y/n/' $(CONFIG_PATH)
+	sed -i 's/# \(CONFIG_MEMCG_SWAP_ENABLED\) is not set/\1=y/' $(CONFIG_PATH)
+	sed -i 's/# \(CONFIG_MEMCG_KMEM\) is not set/\1=y/' $(CONFIG_PATH)
+	sed -i 's/# \(CONFIG_CGROUP_HUGETLB\) is not set/\1=y/' $(CONFIG_PATH)
+	@mkdir -p $(BASE)/kernel-builder/dist/$(VERSION)
+
+build-builder:
+	@docker build -t kernel-builder \
+		-f $(BASE)/kernel-builder/src/images/builder/Dockerfile \
+		$(BASE)/kernel-builder/src
+
+build-kernel:
+	@docker run -it --rm \
+		-v $(BASE)/kernel-builder/dist/$(VERSION):/dist \
+		kernel-builder $(VERSION)
 
 clean:
-	rm -rf buildkernel/dist/* buildkernel/dist/.*
-	rm -rf dist/*
+	@rm -rf buildkernel/dist/* buildkernel/dist/.*
+	@rm -rf dist/*
 
 test:
 	for pkg in firmware-image headers image libc-dev; do \
@@ -17,4 +35,4 @@ test:
 	done
 
 templates:
-	tmpld --strict --data templates/vars.yaml templates/*.j2
+	@tmpld --strict --data templates/vars.yaml templates/*.j2

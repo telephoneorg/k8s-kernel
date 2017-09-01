@@ -41,3 +41,10 @@ pushd /src/meta
 cp /build/*.deb /dist/
 cp /build/*.dsc /dist/
 cp /build/*.tar.gz /dist/
+
+echo -e"
+**********
+* Done building kernel $VERSION
+**********"
+
+ls -lah /dist

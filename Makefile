@@ -21,7 +21,7 @@ build-builder:
 		$(BASE)/kernel-builder/src
 
 build-kernel:
-	@docker run -it --rm \
+	@docker run --rm \
 		-v $(BASE)/kernel-builder/dist/$(VERSION):/dist \
 		kernel-builder $(VERSION)
 

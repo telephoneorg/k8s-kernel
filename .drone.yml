@@ -6,7 +6,7 @@ pipeline:
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     commands:
-    - make kernel
+    - make build
 
   github_release:
     image: plugins/github-release

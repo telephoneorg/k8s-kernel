@@ -1,17 +1,16 @@
 #!/bin/bash
 
-VERSION=$1
+VERSION=${1:-$KERNEL_VERSION}
 
-if [[ -z "${VERSION}" ]]; then
+if [[ -z $VERSION ]]; then
     echo "Syntax: $0 <version>"
     echo "  where version is an official kernel version, e.g. 4.9.46"
     exit 1
 fi
 
-set -ex
+set -e
 
 REVISION=k8s
-KDEB_PKGVERSION=${VERSION}
 
 gpg2 --import /src/38DBBDC86092693E.asc
 
@@ -23,12 +22,12 @@ pushd /build
     # Check signature
     xz -cd linux-${VERSION}.tar.xz | gpg2 --verify linux-${VERSION}.tar.sign -
 
-    # rm -rf linux-${VERSION} || true
+    rm -rf linux-${VERSION} || true
     tar xf linux-${VERSION}.tar.xz
     cp -L /src/configs/config-${VERSION} linux-${VERSION}/.config
     pushd linux-${VERSION}
         make clean
-        make -j $(nproc) deb-pkg LOCALVERSION=-${REVISION} KDEB_PKGVERSION=${KDEB_PKGVERSION}
+        make -j $(nproc) deb-pkg LOCALVERSION=-${REVISION} KDEB_PKGVERSION=$VERSION
         popd
     popd
 
@@ -42,9 +41,10 @@ cp /build/*.deb /dist/
 cp /build/*.dsc /dist/
 cp /build/*.tar.gz /dist/
 
-echo -e"
-**********
+echo -e "
+*******************************
 * Done building kernel $VERSION
-**********"
+*******************************
+"
 
 ls -lah /dist

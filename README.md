@@ -1,5 +1,5 @@
 # k8s Kernel
-[![Build Status](https://drone.valuphone.com/api/badges/joeblackwaslike/k8s-kernel/status.svg)](https://drone.valuphone.com/joeblackwaslike/k8s-kernel) [![Github Repo](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/joeblackwaslike/k8s-kernel)
+[![Build Status](https://drone.valuphone.com/api/badges/telephoneorg/k8s-kernel/status.svg)](https://drone.valuphone.com/telephoneorg/k8s-kernel) [![Github Repo](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/telephoneorg/k8s-kernel)
 
 
 ## Maintainer

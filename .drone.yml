@@ -1,6 +1,6 @@
 pipeline:
   build:
-    image: joeblackwaslike/docker-builder
+    image: telephoneorg/docker-builder
     environment:
     - KERNEL_VERSION=${KERNEL_VERSION}
     volumes:
